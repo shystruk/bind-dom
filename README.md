@@ -20,7 +20,7 @@ import { oneTime, oneWay, twoWay, disconnectBindDom, disconnectBindDomAll } from
 import bindDom from 'bind-dom'
 ```
 
-## Example ##
+## Examples ##
 ```javascript
 import bindDom from 'bind-dom'
 
@@ -28,25 +28,49 @@ bindDom.oneWay('observeElement', document.querySelector('#observerNode'), docume
 bindDom.disconnectBindDom('observeElement');
 ```
 
+```javascript
+import { twoWay, disconnectBindDom } from 'bind-dom'
+
+twoWay('twoWayObserver', document.querySelector('#observerNode'), document.querySelector('#observerNode_2'));
+disconnectBindDom('twoWayObserver');
+```
+
 
 ## API
 - **oneTime(observerName, observerNode, toNode, config)** - binding occurs one time when element content change
 
-- **oneWay(observerName, observerNode, toNode, config)** - creates an ongoing connection between **observerNode** and **toNode**
+- **oneWay(observerName, observerNode, toNode, config)** - creates an ongoing connection between *observerNode* and *toNode*
  
-- **twoWay(observerName, observerNode, toNode, config)** - creates a vice versa connection between **observerNode** and **toNode**
+- **twoWay(observerName, observerNode, toNode, config)** - creates a vice versa connection between *observerNode* and *toNode*
 
 - **disconnectBindDom(observerName)** - disconnects observer
 
 - **disconnectBindDomAll()** - disconnects all observers
 
-#### Arguments
+### Arguments
 {String} observerName    - unique observer name<br>
-{Element} observerNode   - node element which is going to be observe for DOM changes<br>
-{Element} toNode         - node element to which changes is going to be applied (twoWay binding vice versa with observerNode)<br>
-{Object} config          - *members: { attributes: true, childList: true, subtree: true, characterData: true }* - what target objects to observe, **characterData** by default;
-*callback: (mutationsList) => { // mutationsList is a list of nodejs which were changed }* 
 
+{Element} observerNode   - node element which is going to be observe for DOM changes<br>
+
+{Element} toNode         - node element to which changes is going to be applied (twoWay binding vice versa with observerNode)<br>
+
+{Object} config          - 
+```javascript
+const config = {
+    // what target objects to observe, characterData by default
+    members: {
+        attributes: true,
+        childList: true,
+        subtree: true,
+        characterData: true,
+        attributeOldValue: true,
+        characterDataOldValue: true
+    },
+    callback: (mutationsList) => { 
+        // mutationsList[Array] - list of nodes which were changed 
+    }
+}
+```
 
 ## Contributing
 Any contributions you make **are greatly appreciated**.

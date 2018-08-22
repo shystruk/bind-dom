@@ -1,7 +1,7 @@
 var OBSERVERS = {};
 
 function _initObserver(observerNode, toNode, config, type, observerName) {
-    var members = (config && config.members) || { attributes: true, childList: true, subtree: true, characterData: true };
+    var members = (config && config.members) || { characterData: true };
     var callback = (config && config.callback) || _callBack;
 
     function _callBack(mutationsList) {
