@@ -24,15 +24,15 @@ import bindDom from 'bind-dom'
 ```javascript
 import bindDom from 'bind-dom'
 
-bindDom.oneWay('observeElement', document.querySelector('#observerNode'), document.querySelector('#toNode'));
-bindDom.disconnectBindDom('observeElement');
+bindDom.oneWay('observeElement', document.querySelector('#observerNode'), document.querySelector('#toNode'))
+bindDom.disconnectBindDom('observeElement')
 ```
 
 ```javascript
 import { twoWay, disconnectBindDom } from 'bind-dom'
 
-twoWay('twoWayObserver', document.querySelector('#observerNode'), document.querySelector('#observerNode_2'));
-disconnectBindDom('twoWayObserver');
+twoWay('twoWayObserver', document.querySelector('#observerNode'), document.querySelector('#observerNode_2'))
+disconnectBindDom('twoWayObserver')
 ```
 
 

@@ -12,7 +12,8 @@
     "mutation-observer",
     "dom-binding",
     "data-binding",
-    "dom-changes"
+    "dom-changes",
+    "change-detection"
   ],
   "author": {
     "name": "Vasyl Stokolosa",
