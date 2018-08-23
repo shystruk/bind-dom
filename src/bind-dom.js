@@ -1,21 +1,39 @@
 var OBSERVERS = {};
+var nodeNameRegExp = /^INPUT|TEXTAREA/gi;
+
+function _getElementValue(node) {
+    if (node.nodeName.search(nodeNameRegExp) !== -1) {
+        return node.value;
+    }
+
+    return node.textContent;
+}
+
+function _setElementValue(node, value) {
+    if (node.nodeName.search(nodeNameRegExp) !== -1) {
+        node.setAttribute('value', value);
+    } else {
+        node.innerHTML = value;
+    }
+}
 
 function _initObserver(observerNode, toNode, config, type, observerName) {
-    var members = (config && config.members) || { characterData: true };
+    var members = (config && config.members) || { attributes: true, childList: true, subtree: true, characterData: true };
     var callback = (config && config.callback) || _callBack;
 
     function _callBack(mutationsList) {
         for (var i = 0; i < mutationsList.length; i++) {
-            if (mutationsList[i].type === 'characterData') {
-                if (type === 'oneTime') {
-                    toNode.innerHTML = mutationsList[i].target.textContent;
-                    OBSERVERS[observerName].disconnect();
-                    delete OBSERVERS[observerName];
-                }
+            var observerNodeValue = _getElementValue(mutationsList[i].target);
+            var toNodeValue = _getElementValue(toNode);
 
-                if (observerNode.innerHTML !== toNode.innerHTML) {
-                    toNode.innerHTML = mutationsList[i].target.textContent;
-                }
+            if (type === 'oneTime') {
+                _setElementValue(toNode, observerNodeValue);
+                OBSERVERS[observerName].disconnect();
+                delete OBSERVERS[observerName];
+            }
+
+            if (observerNodeValue !== toNodeValue) {
+                _setElementValue(toNode, observerNodeValue);
             }
         }
     }
