@@ -36,6 +36,29 @@ twoWay('twoWayObserver', document.querySelector('#observerNode'), document.query
 disconnectBindDom('twoWayObserver')
 ```
 
+> MutationObserver is watching changes being made to the DOM tree. So, for input/textarea elements make sure that attributes are changed. See the examples below. 
+
+#### Input
+```javascript
+// JS
+function changeValueAttr(event) {
+ event.target.setAttribute('value', event.target.value)
+}
+    
+// HTML
+<input type="text" onkeyup="changeValueAttr(event)" />
+```
+
+#### Textarea
+```javascript
+// JS
+function changeAttr(event) {
+ event.target.setAttribute('data-bind-dom', event.target.value.length)
+}
+    
+// HTML
+<textarea data-bind-dom="" onkeyup="changeAttr(event)"></textarea>
+```
 
 ## API
 - **oneTime(observerName, observerNode, toNode, config)** - binding occurs one time when element content change
