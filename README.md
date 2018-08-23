@@ -58,7 +58,8 @@ disconnectBindDom('twoWayObserver')
 {Object} config          - 
 ```javascript
 const config = {
-    // what target objects to observe, { attributes: true, childList: true, subtree: true, characterData: true } by default
+    // what target objects to observe
+    // { attributes: true, childList: true, subtree: true, characterData: true } by default
     members: {
         attributes: true,
         childList: true,
