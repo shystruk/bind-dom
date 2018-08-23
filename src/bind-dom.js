@@ -1,8 +1,8 @@
 var OBSERVERS = {};
-var nodeNameRegExp = /^INPUT|TEXTAREA/gi;
+var formInputsRegExp = /^INPUT|TEXTAREA/gi;
 
 function _getElementValue(node) {
-    if (node.nodeName.search(nodeNameRegExp) !== -1) {
+    if (node.nodeName.search(formInputsRegExp) !== -1) {
         return node.value;
     }
 
@@ -10,7 +10,7 @@ function _getElementValue(node) {
 }
 
 function _setElementValue(node, value) {
-    if (node.nodeName.search(nodeNameRegExp) !== -1) {
+    if (node.nodeName.search(formInputsRegExp) !== -1) {
         node.setAttribute('value', value);
     } else {
         node.innerHTML = value;
@@ -29,7 +29,7 @@ function _initObserver(observerNode, toNode, config, type, observerName) {
             if (type === 'oneTime') {
                 _setElementValue(toNode, observerNodeValue);
                 OBSERVERS[observerName].disconnect();
-                delete OBSERVERS[observerName];
+                return void delete OBSERVERS[observerName];
             }
 
             if (observerNodeValue !== toNodeValue) {
