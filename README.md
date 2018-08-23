@@ -4,6 +4,7 @@
 Change detection mechanisms based on [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) interface.
 It provides the ability to watch for changes being made to the DOM tree. You may connect node elements in One-Time, One-Way & Two-Way binding.
 
+![](Demo.gif)
 
 ## Installation
 #### npm
@@ -57,7 +58,7 @@ disconnectBindDom('twoWayObserver')
 {Object} config          - 
 ```javascript
 const config = {
-    // what target objects to observe, characterData by default
+    // what target objects to observe, { attributes: true, childList: true, subtree: true, characterData: true } by default
     members: {
         attributes: true,
         childList: true,
