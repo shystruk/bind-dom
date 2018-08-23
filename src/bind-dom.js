@@ -1,8 +1,13 @@
 var OBSERVERS = {};
-var formInputsRegExp = /^INPUT|TEXTAREA/gi;
+var inputNodeName = 'INPUT';
+var textAreaNodeName = 'TEXTAREA';
 
 function _getElementValue(node) {
-    if (node.nodeName.search(formInputsRegExp) !== -1) {
+    if (node.nodeName === inputNodeName) {
+        return node.getAttribute('value');
+    }
+
+    if (node.nodeName === textAreaNodeName) {
         return node.value;
     }
 
@@ -10,15 +15,17 @@ function _getElementValue(node) {
 }
 
 function _setElementValue(node, value) {
-    if (node.nodeName.search(formInputsRegExp) !== -1) {
+    if (node.nodeName === inputNodeName) {
         node.setAttribute('value', value);
+    } else if (node.nodeName === textAreaNodeName) {
+        node.value = value;
     } else {
         node.innerHTML = value;
     }
 }
 
 function _initObserver(observerNode, toNode, config, type, observerName) {
-    var members = (config && config.members) || { attributes: true, childList: true, subtree: true, characterData: true };
+    var members = (config && config.members) || { attributes: true, childList: true, characterData: true };
     var callback = (config && config.callback) || _callBack;
 
     function _callBack(mutationsList) {
