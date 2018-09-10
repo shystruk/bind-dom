@@ -15,7 +15,7 @@ It provides the ability to watch for changes being made to the DOM tree. You may
 
 ## Usage
 ```javascript
-import { oneTime, oneWay, twoWay, disconnectBindDom, disconnectBindDomAll } from 'bind-dom'
+import { oneTime, oneWay, twoWay, disconnect, disconnectAll } from 'bind-dom'
 ```
 ```javascript
 import bindDom from 'bind-dom'
@@ -25,15 +25,15 @@ import bindDom from 'bind-dom'
 ```javascript
 import bindDom from 'bind-dom'
 
-bindDom.oneWay('observeElement', document.querySelector('#observerNode'), document.querySelector('#toNode'))
-bindDom.disconnectBindDom('observeElement')
+bindDom.oneWay('oneWayObserver', document.querySelector('#observerNode'), document.querySelector('#toNode'))
+bindDom.disconnect('oneWayObserver')
 ```
 
 ```javascript
-import { twoWay, disconnectBindDom } from 'bind-dom'
+import { twoWay, disconnect } from 'bind-dom'
 
 twoWay('twoWayObserver', document.querySelector('#observerNode'), document.querySelector('#observerNode_2'))
-disconnectBindDom('twoWayObserver')
+disconnect('twoWayObserver')
 ```
 
 > MutationObserver is watching changes being made to the DOM tree. So, for input/textarea elements make sure that attributes are changed. See the examples below. 
@@ -67,9 +67,9 @@ function changeAttr(event) {
  
 - **twoWay(observerName, observerNode, toNode, config)** - creates a vice versa connection between *observerNode* and *toNode*
 
-- **disconnectBindDom(observerName)** - disconnects observer
+- **disconnect(observerName)** - disconnects observer
 
-- **disconnectBindDomAll()** - disconnects all observers
+- **disconnectAll()** - disconnects all observers
 
 ### Arguments
 {String} observerName    - unique observer name<br>

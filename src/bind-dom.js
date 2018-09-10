@@ -86,7 +86,7 @@ module.exports = {
     /**
      * @param {String} observerName
      */
-    disconnectBindDom: function(observerName) {
+    disconnect: function(observerName) {
         OBSERVERS[observerName].disconnect();
         delete OBSERVERS[observerName];
 
@@ -96,7 +96,7 @@ module.exports = {
         }
     },
 
-    disconnectBindDomAll: function() {
+    disconnectAll: function() {
         for(var observer in OBSERVERS) {
             OBSERVERS[observer].disconnect();
             delete OBSERVERS[observer];
