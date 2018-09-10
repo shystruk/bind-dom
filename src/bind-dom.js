@@ -24,29 +24,29 @@ function _setElementValue(node, value) {
     }
 }
 
-function _initObserver(observerNode, toNode, config, type, observerName) {
+function _initObserver(targetNode, toNode, config, type, observerName) {
     var members = (config && config.members) || { attributes: true, childList: true, characterData: true };
     var callback = (config && config.callback) || _callBack;
 
     function _callBack(mutationsList) {
         for (var i = 0; i < mutationsList.length; i++) {
-            var observerNodeValue = _getElementValue(mutationsList[i].target);
+            var targetNodeValue = _getElementValue(mutationsList[i].target);
             var toNodeValue = _getElementValue(toNode);
 
             if (type === 'oneTime') {
-                _setElementValue(toNode, observerNodeValue);
+                _setElementValue(toNode, targetNodeValue);
                 OBSERVERS[observerName].disconnect();
                 return void delete OBSERVERS[observerName];
             }
 
-            if (observerNodeValue !== toNodeValue) {
-                _setElementValue(toNode, observerNodeValue);
+            if (targetNodeValue !== toNodeValue) {
+                _setElementValue(toNode, targetNodeValue);
             }
         }
     }
 
     var observer = new MutationObserver(callback);
-    observer.observe(observerNode, members);
+    observer.observe(targetNode, members);
 
     return observer;
 }
@@ -54,33 +54,33 @@ function _initObserver(observerNode, toNode, config, type, observerName) {
 module.exports = {
     /**
      * @param {String} observerName
-     * @param {Element} observerNode
+     * @param {Element} targetNode
      * @param {Element} toNode
      * @param {Object=} config
      */
-    oneTime: function(observerName, observerNode, toNode, config) {
-        OBSERVERS[observerName] = _initObserver(observerNode, toNode, config, 'oneTime', observerName);
+    oneTime: function(observerName, targetNode, toNode, config) {
+        OBSERVERS[observerName] = _initObserver(targetNode, toNode, config, 'oneTime', observerName);
     },
 
     /**
      * @param {String} observerName
-     * @param {Element} observerNode
+     * @param {Element} targetNode
      * @param {Element} toNode
      * @param {Object=} config
      */
-    oneWay: function(observerName, observerNode, toNode, config) {
-        OBSERVERS[observerName] = _initObserver(observerNode, toNode, config, 'oneWay');
+    oneWay: function(observerName, targetNode, toNode, config) {
+        OBSERVERS[observerName] = _initObserver(targetNode, toNode, config, 'oneWay');
     },
 
     /**
      * @param {String} observerName
-     * @param {Element} observerNode
+     * @param {Element} targetNode
      * @param {Element} toNode
      * @param {Object=} config
      */
-    twoWay: function(observerName, observerNode, toNode, config) {
-        OBSERVERS[observerName] = _initObserver(observerNode, toNode, config, 'twoWay');
-        OBSERVERS[observerName + '_two_way'] = _initObserver(toNode, observerNode, config, 'twoWay');
+    twoWay: function(observerName, targetNode, toNode, config) {
+        OBSERVERS[observerName] = _initObserver(targetNode, toNode, config, 'twoWay');
+        OBSERVERS[observerName + '_two_way'] = _initObserver(toNode, targetNode, config, 'twoWay');
     },
 
     /**

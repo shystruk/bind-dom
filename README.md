@@ -25,14 +25,14 @@ import bindDom from 'bind-dom'
 ```javascript
 import bindDom from 'bind-dom'
 
-bindDom.oneWay('oneWayObserver', document.querySelector('#observerNode'), document.querySelector('#toNode'))
+bindDom.oneWay('oneWayObserver', document.querySelector('#targetNode'), document.querySelector('#toNode'))
 bindDom.disconnect('oneWayObserver')
 ```
 
 ```javascript
 import { twoWay, disconnect } from 'bind-dom'
 
-twoWay('twoWayObserver', document.querySelector('#observerNode'), document.querySelector('#observerNode_2'))
+twoWay('twoWayObserver', document.querySelector('#targetNode'), document.querySelector('#targetNode_2'))
 disconnect('twoWayObserver')
 ```
 
@@ -61,11 +61,11 @@ function changeAttr(event) {
 ```
 
 ## API
-- **oneTime(observerName, observerNode, toNode, config)** - binding occurs one time when element content change
+- **oneTime(observerName, targetNode, toNode, config)** - binding occurs one time when element content change
 
-- **oneWay(observerName, observerNode, toNode, config)** - creates an ongoing connection between *observerNode* and *toNode*
+- **oneWay(observerName, targetNode, toNode, config)** - creates an ongoing connection between *targetNode* and *toNode*
  
-- **twoWay(observerName, observerNode, toNode, config)** - creates a vice versa connection between *observerNode* and *toNode*
+- **twoWay(observerName, targetNode, toNode, config)** - creates a vice versa connection between *targetNode* and *toNode*
 
 - **disconnect(observerName)** - disconnects observer
 
@@ -74,9 +74,9 @@ function changeAttr(event) {
 ### Arguments
 {String} observerName    - unique observer name<br>
 
-{Element} observerNode   - node element which is going to be observe for DOM changes<br>
+{Element} targetNode   - node element which is going to be observe for DOM changes<br>
 
-{Element} toNode         - node element to which changes is going to be applied (twoWay binding vice versa with observerNode)<br>
+{Element} toNode         - node element to which changes is going to be applied (twoWay binding vice versa with targetNode)<br>
 
 {Object} config          - [specs](https://dom.spec.whatwg.org/#mutationobserver)
 ```javascript
