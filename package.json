@@ -1,12 +1,15 @@
 {
 	"name": "bind-dom",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "Synchronization between two DOM elements (oneTime, oneWay, twoWay)",
 	"main": "./src/bind-dom.js",
 	"directories": {
 		"src": "src"
 	},
 	"repository": "https://github.com/shystruk/bind-dom.git",
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org"
+	},
 	"keywords": [
 		"observer",
 		"mutation-observer",
