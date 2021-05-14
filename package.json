@@ -7,6 +7,9 @@
 		"src": "src"
 	},
 	"repository": "https://github.com/shystruk/bind-dom.git",
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org"
+	},
 	"keywords": [
 		"observer",
 		"mutation-observer",
